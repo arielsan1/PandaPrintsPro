@@ -8,7 +8,7 @@ export default defineConfig({
                 main: resolve(__dirname, 'index.html'),
                 freeTools: resolve(__dirname, 'free-tools.html'),
                 coaching: resolve(__dirname, 'coaching.html'),
-                blog: resolve(__dirname, 'blog.html'),
+                community: resolve(__dirname, 'community.html'),
                 thankYou: resolve(__dirname, 'thank-you.html'),
             },
         },

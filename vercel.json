@@ -11,8 +11,8 @@
             "destination": "/coaching.html"
         },
         {
-            "source": "/blog",
-            "destination": "/blog.html"
+            "source": "/community",
+            "destination": "/community.html"
         },
         {
             "source": "/thank-you",
