@@ -47,18 +47,9 @@
             transform: perspective(1000px) rotateY(-5deg);
         }
 
-        .iframe-section {
+        .feature-grid {
             padding: 100px 0;
             background: var(--white);
-        }
-
-        .iframe-wrapper {
-            background: var(--white);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border);
-            margin-top: 3rem;
         }
 
         @media (max-width: 1024px) {
@@ -124,23 +115,29 @@
             </div>
         </section>
 
-        <section class="iframe-section section-padding">
+        <section class="feature-grid section-padding">
             <div class="container">
                 <div class="section-header text-center">
-                    <span class="section-subtitle">Stay Connected</span>
-                    <h2 class="section-title">Live Community Feed <span
-                            style="font-size: 0.6em; display: block; margin-top: 0.5rem; opacity: 0.7;">(Hosted on
-                            LaunchBox)</span></h2>
+                    <span class="section-subtitle">Why Join?</span>
+                    <h2 class="section-title">Growth is Better Together</h2>
                 </div>
 
-                <div class="iframe-wrapper reveal">
-                    <iframe src="https://www.launchbox.space/embed/[your-channel]" width="100%" height="800px"
-                        frameborder="0" style="border:0;" allowfullscreen></iframe>
-                </div>
-
-                <div class="text-center" style="margin-top: 3rem;">
-                    <a href="https://www.launchbox.space/[your-group-link]" target="_blank"
-                        class="btn btn-outline btn-large">Open Full Community in LaunchBox</a>
+                <div class="grid grid-3">
+                    <div class="card resource-card reveal">
+                        <i class="fas fa-pencil-alt resource-icon"></i>
+                        <h3>Content Strategy</h3>
+                        <p>Learn how to create content that converts and builds authority in your niche.</p>
+                    </div>
+                    <div class="card resource-card reveal">
+                        <i class="fas fa-bullhorn resource-icon"></i>
+                        <h3>Marketing Mastery</h3>
+                        <p>Get insights into modern marketing tactics that actually work for boutique brands.</p>
+                    </div>
+                    <div class="card resource-card reveal">
+                        <i class="fas fa-users resource-icon"></i>
+                        <h3>Founder Network</h3>
+                        <p>Connect with other ambitious entrepreneurs to share wins and solve problems together.</p>
+                    </div>
                 </div>
             </div>
         </section>
