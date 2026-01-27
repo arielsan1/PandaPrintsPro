@@ -49,11 +49,42 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const targetElement = document.querySelector(targetId);
 
+            // Close mobile menu if open
+            if (navList && navList.classList.contains('active')) {
+                navList.classList.remove('active');
+                mobileNavToggle.classList.remove('active');
+            }
+
             if (targetElement) {
+                const headerHeight = document.querySelector('.header').offsetHeight;
                 window.scrollTo({
-                    top: targetElement.offsetTop - 80,
+                    top: targetElement.offsetTop - headerHeight,
                     behavior: 'smooth'
                 });
+            }
+        });
+    });
+
+    // Active link highlighting on scroll
+    const navLinks = document.querySelectorAll('.nav-list a[href^="#"]');
+    const sections = document.querySelectorAll('section[id]');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        const headerHeight = document.querySelector('.header').offsetHeight;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (window.scrollY >= (sectionTop - headerHeight - 100)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
             }
         });
     });
@@ -162,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 lineItems: [{ price: priceId, quantity: 1 }],
                 mode: 'payment',
                 successUrl: window.location.origin + '/thank-you',
-                cancelUrl: window.location.origin + '/coaching',
+                cancelUrl: window.location.origin + '/#coaching',
             }).then((result) => {
                 if (result.error) {
                     alert(result.error.message);

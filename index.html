@@ -15,22 +15,24 @@
         rel="stylesheet">
     <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
     <link rel="stylesheet" href="/style.css">
+    <!-- Stripe SDK for Coaching Services -->
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 
 <body>
     <header class="header">
         <div class="container nav-container">
-            <div class="logo">
+            <a href="#home" class="logo">
                 <img src="/assets/logo.png" alt="PandaPrintsPro Logo" id="site-logo">
                 <span>PandaPrintsPro</span>
-            </div>
+            </a>
             <nav class="nav">
                 <ul class="nav-list">
-                    <li><a href="/">Home</a></li>
+                    <li><a href="#home">Home</a></li>
                     <li><a href="https://pandaprintspro.etsy.com" target="_blank">Shop Templates</a></li>
-                    <li><a href="/free-tools">Free Tools</a></li>
-                    <li><a href="/coaching">Coaching</a></li>
-                    <li><a href="/community">Community</a></li>
+                    <li><a href="#free-tools">Free Tools</a></li>
+                    <li><a href="#coaching">Coaching</a></li>
+                    <li><a href="#community">Community</a></li>
                 </ul>
             </nav>
             <button class="mobile-nav-toggle" aria-label="Toggle navigation">
@@ -42,7 +44,8 @@
     </header>
 
     <main>
-        <section class="hero">
+        <!-- Hero Section -->
+        <section id="home" class="hero">
             <div class="container hero-container">
                 <div class="hero-content">
                     <h1 class="hero-title">Effective Planning,<br><span class="text-accent">Functional Design.</span>
@@ -63,6 +66,7 @@
             </div>
         </section>
 
+        <!-- About Section -->
         <section id="about" class="about">
             <div class="container about-container">
                 <div class="about-grid">
@@ -93,6 +97,7 @@
             </div>
         </section>
 
+        <!-- Collections Section -->
         <section id="collections" class="collections">
             <div class="container">
                 <div class="section-header">
@@ -137,11 +142,146 @@
             </div>
         </section>
 
-        <section id="inspiration" class="pinterest-section">
+        <!-- Free Tools Section -->
+        <section id="free-tools" class="free-tools section-padding bg-soft">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Resource Library</span>
+                    <h2 class="section-title">Empower Your Career</h2>
+                    <p class="section-subtitle">Start with our professional-grade free tools and resources.</p>
+                </div>
+                <div class="grid grid-3">
+                    <div class="card resource-card reveal">
+                        <div class="card-image themed-overlay">
+                            <i class="fas fa-file-invoice resource-icon"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>The 2026 Guide to Beating the ATS</h3>
+                            <p>Master the latest Applicant Tracking Systems with our comprehensive formatting and
+                                strategy guide.</p>
+                            <button class="btn btn-primary open-modal" data-resource="ATS Guide">Download Now</button>
+                        </div>
+                    </div>
+                    <div class="card resource-card reveal">
+                        <div class="card-image themed-overlay">
+                            <i class="fas fa-lightbulb resource-icon"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Career Clarity Workbook</h3>
+                            <p>Discover your ideal career path with our interactive self-assessment and vision workbook.
+                            </p>
+                            <button class="btn btn-primary open-modal" data-resource="Clarity Workbook">Download
+                                Now</button>
+                        </div>
+                    </div>
+                    <div class="card resource-card reveal">
+                        <div class="card-image themed-overlay">
+                            <i class="fas fa-comments resource-icon"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Interview Prep Deck</h3>
+                            <p>Master your next interview with this interactive deck of scenario-based questions and
+                                strategies.</p>
+                            <button class="btn btn-primary open-modal" data-resource="Interview Deck">Download
+                                Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coaching Section -->
+        <section id="coaching" class="coaching section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Personalized Support</span>
+                    <h2 class="section-title">Go Beyond the Template</h2>
+                    <p class="section-subtitle">Get personalized career strategy and professional document feedback from
+                        an industry expert.</p>
+                </div>
+                <div class="grid grid-2">
+                    <div class="card service-card reveal">
+                        <div class="card-image themed-overlay">
+                            <i class="fas fa-video resource-icon"></i>
+                        </div>
+                        <div class="card-content">
+                            <span class="service-type">Passive Feedback</span>
+                            <h3>Resume Audit (Video Feedback)</h3>
+                            <p class="service-price">$49</p>
+                            <p>Send us your current resume and receive a 10-minute video walkthrough detailing exactly
+                                what to change to pass the ATS and impress recruiters.</p>
+                            <button id="resume-audit-checkout" class="btn btn-primary btn-block">Book Now (Secure via
+                                Stripe)</button>
+                        </div>
+                    </div>
+                    <div class="card service-card reveal">
+                        <div class="card-image themed-overlay">
+                            <i class="fas fa-calendar-alt resource-icon"></i>
+                        </div>
+                        <div class="card-content">
+                            <span class="service-type">Live Strategy</span>
+                            <h3>45-Minute Career Strategy Call</h3>
+                            <p class="service-price">$99</p>
+                            <p>A deep-dive session to map out your next move, optimize your LinkedIn profile, or
+                                practice for a high-stakes interview.</p>
+                            <a href="https://calendly.com/pandaprintsprous/30min" target="_blank"
+                                class="btn btn-primary btn-block">Schedule Call (Calendly)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community/LaunchBox Section -->
+        <section id="community" class="community">
+            <div class="split-hero">
+                <div class="hero-left reveal">
+                    <span class="section-subtitle">Partnership</span>
+                    <h1 class="hero-title">Join the Community <span class="text-accent">(Powered by LaunchBox)</span>
+                    </h1>
+                    <p class="lead">We've partnered with LaunchBox.space—the premier hub for entrepreneurs and business
+                        owners—to create a dedicated space where you can master content creation, refine your marketing
+                        strategy, and scale your impact.</p>
+                    <div class="hero-actions">
+                        <a href="https://www.launchbox.space/" target="_blank" class="btn btn-primary btn-large">Join on
+                            LaunchBox</a>
+                    </div>
+                </div>
+                <div class="hero-right reveal"
+                    style="padding: 40px; background: #fdf2f0; display: flex; align-items: center; justify-content: center;">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1000"
+                        alt="LaunchBox Community Preview"
+                        style="width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); transform: perspective(1000px) rotateY(-5deg);">
+                </div>
+            </div>
+
+            <div class="container section-padding">
+                <div class="grid grid-3">
+                    <div class="card resource-card reveal">
+                        <i class="fas fa-pencil-alt resource-icon"></i>
+                        <h3>Content Strategy</h3>
+                        <p>Learn how to create content that converts and builds authority in your niche.</p>
+                    </div>
+                    <div class="card resource-card reveal">
+                        <i class="fas fa-bullhorn resource-icon"></i>
+                        <h3>Marketing Mastery</h3>
+                        <p>Get insights into modern marketing tactics that actually work for boutique brands.</p>
+                    </div>
+                    <div class="card resource-card reveal">
+                        <i class="fas fa-users resource-icon"></i>
+                        <h3>Founder Network</h3>
+                        <p>Connect with other ambitious entrepreneurs to share wins and solve problems together.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Inspiration Section -->
+        <section id="inspiration" class="pinterest-section bg-soft">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">Inspiration & Designs</h2>
-                    <p class="section-subtitle">Scroll through our latest pins and career tools</p>
+                    <h2 class="section-title text-center">Inspiration & Designs</h2>
+                    <p class="section-subtitle text-center">Scroll through our latest pins and career tools</p>
                 </div>
                 <div class="pinterest-wrapper">
                     <a data-pin-do="embedUser" data-pin-board-width="1200" data-pin-scale-height="500"
@@ -150,23 +290,24 @@
             </div>
         </section>
 
-        <section id="reviews" class="reviews">
+        <!-- Reviews Section -->
+        <section id="reviews" class="reviews section-padding">
             <div class="container">
                 <h2 class="section-title text-center">What Our Customers Say</h2>
                 <div class="reviews-grid">
-                    <div class="review-card">
+                    <div class="review-card reveal">
                         <div class="stars">★★★★★</div>
                         <p class="review-text">"First time downloading a Resume template... it was surprisingly easy. I
                             like this way more than subscribing to some website."</p>
                         <p class="review-author">— DSC</p>
                     </div>
-                    <div class="review-card">
+                    <div class="review-card reveal">
                         <div class="stars">★★★★★</div>
                         <p class="review-text">"The layout is so clean and professional. I received three interview
                             calls within a week of updating my resume!"</p>
                         <p class="review-author">— Sarah T.</p>
                     </div>
-                    <div class="review-card">
+                    <div class="review-card reveal">
                         <div class="stars">★★★★★</div>
                         <p class="review-text">"Excellent planning sheets. They've really helped me stay on top of my
                             grad school applications."</p>
@@ -177,15 +318,32 @@
         </section>
     </main>
 
+    <!-- Modal for Free Tools (Moved to main page for single-page flow) -->
+    <div id="leadModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Get Your Free <span id="resource-name">Resource</span></h2>
+            <p>Enter your details below and we'll send the PDF straight to your inbox.</p>
+            <form id="leadForm" class="lead-form">
+                <input type="text" id="firstName" placeholder="First Name" required>
+                <input type="email" id="email" placeholder="Email Address" required>
+                <button type="submit" class="btn btn-primary btn-block">Send Me My Download</button>
+            </form>
+            <p class="form-disclaimer">By submitting, you agree to receive career tips and updates. You can unsubscribe
+                at any time.</p>
+        </div>
+    </div>
+
+    <!-- Unified Footer -->
     <footer class="footer">
-        <div class="container footer-container">
-            <div class="footer-brand">
+        <div class="container footer-grid">
+            <a href="#home" class="footer-brand">
                 <div class="logo">
                     <img src="/assets/logo.png" alt="PandaPrintsPro Logo">
                     <span>PandaPrintsPro</span>
                 </div>
                 <p>Functional design for professional growth.</p>
-            </div>
+            </a>
             <div class="footer-links">
                 <div class="link-group">
                     <h4>Shop</h4>
@@ -195,24 +353,24 @@
                     </ul>
                 </div>
                 <div class="link-group">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="#free-tools">Free Tools</a></li>
+                        <li><a href="#coaching">Coaching</a></li>
+                        <li><a href="#community">Partnerships</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
                     <h4>Follow Us</h4>
                     <ul>
                         <li><a href="https://www.pinterest.com/pandaprintsprous/" target="_blank"><i
                                     class="fab fa-pinterest"></i> Pinterest</a></li>
                     </ul>
                 </div>
-                <div class="link-group">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Terms</a></li>
-                    </ul>
-                </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 PandaPrintsPro. All rights reserved.</p>
-            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 PandaPrintsPro. All rights reserved.</p>
         </div>
     </footer>
 
