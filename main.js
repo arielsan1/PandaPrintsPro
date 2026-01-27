@@ -61,11 +61,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const resourceNameSpan = document.getElementById('resource-name');
     const leadForm = document.getElementById('leadForm');
 
+    let currentResource = '';
+
     if (openModalBtns && modal) {
         openModalBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                const resource = btn.getAttribute('data-resource');
-                if (resourceNameSpan) resourceNameSpan.textContent = resource;
+                currentResource = btn.getAttribute('data-resource');
+                if (resourceNameSpan) resourceNameSpan.textContent = currentResource;
                 modal.style.display = 'block';
                 document.body.style.overflow = 'hidden'; // Prevent scroll
             });
@@ -94,11 +96,22 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             const firstName = document.getElementById('firstName').value;
             const email = document.getElementById('email').value;
 
-            // In a real app, you would send this to a backend/ESP (e.g., Mailchimp, ConvertKit)
             console.log(`Lead Captured: ${firstName} - ${email}`);
 
-            // Redirect to thank you page
-            window.location.href = '/thank-you';
+            // Test Mode: Trigger direct download if it's the ATS Guide
+            if (currentResource === 'ATS Guide') {
+                const link = document.createElement('a');
+                link.href = '/The 2026 Guide to Beating the ATS.docx.pdf';
+                link.download = 'The_2026_Guide_to_Beating_the_ATS.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+
+            // Redirect to thank you page after a slight delay to allow download to start
+            setTimeout(() => {
+                window.location.href = '/thank-you';
+            }, 1000);
         });
     }
 });
