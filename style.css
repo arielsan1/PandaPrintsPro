@@ -453,6 +453,34 @@ h4 {
     opacity: 0.8;
 }
 
+/* Pinterest Section */
+.pinterest-section {
+    padding: 140px 0;
+    background-color: var(--bg);
+}
+
+.pinterest-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    background: var(--bg-soft);
+    min-height: 500px;
+}
+
+.pinterest-wrapper span {
+    border-radius: 24px !important;
+}
+
+@media (max-width: 1024px) {
+    .pinterest-section {
+        padding: 100px 0;
+    }
+}
+
 /* Footer */
 .footer {
     padding: 100px 0 50px;
