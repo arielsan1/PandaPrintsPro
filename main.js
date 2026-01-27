@@ -1,57 +1,61 @@
 // Mobile Navigation Toggle
-const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
-const navList = document.querySelector('.nav-list');
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+    const navList = document.querySelector('.nav-list');
 
-if (mobileNavToggle) {
-    mobileNavToggle.addEventListener('click', () => {
-        navList.classList.toggle('active');
-        mobileNavToggle.classList.toggle('active');
-    });
-}
-
-// Nav background change on scroll
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('.header');
-    if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
+    if (mobileNavToggle) {
+        mobileNavToggle.addEventListener('click', () => {
+            navList.classList.toggle('active');
+            mobileNavToggle.classList.toggle('active');
+        });
     }
-});
 
-// Reveal animations on scroll
-const observerOptions = {
-    threshold: 0.1
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
+    // Nav background change on scroll
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('.header');
+        if (header) {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         }
     });
-}, observerOptions);
 
-document.querySelectorAll('section').forEach(section => {
-    section.classList.add('reveal-on-scroll');
-    observer.observe(section);
-});
+    // Reveal animations on scroll
+    const observerOptions = {
+        threshold: 0.1
+    };
 
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+            }
+        });
+    }, observerOptions);
 
-        e.preventDefault();
-        const targetElement = document.querySelector(targetId);
+    document.querySelectorAll('section, .reveal').forEach(el => {
+        el.classList.add('reveal-on-scroll');
+        observer.observe(el);
+    });
 
-        if (targetElement) {
-            window.scrollTo({
-                top: targetElement.offsetTop - 80,
-                behavior: 'smooth'
-            });
-        }
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
+            e.preventDefault();
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
 
     // Modal Logic
@@ -64,12 +68,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     let currentResource = '';
 
     if (openModalBtns && modal) {
+        console.log('Modal system initialized');
         openModalBtns.forEach(btn => {
             btn.addEventListener('click', () => {
+                console.log('Open modal clicked for:', btn.getAttribute('data-resource'));
                 currentResource = btn.getAttribute('data-resource');
                 if (resourceNameSpan) resourceNameSpan.textContent = currentResource;
                 modal.style.display = 'block';
-                document.body.style.overflow = 'hidden'; // Prevent scroll
+                document.body.style.overflow = 'hidden';
             });
         });
 
@@ -98,7 +104,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
             console.log(`Lead Captured: ${firstName} - ${email}`);
 
-            // Test Mode: Trigger direct download if it's the ATS Guide
             if (currentResource === 'ATS Guide') {
                 console.log('Initiating ATS Guide Download...');
                 const link = document.createElement('a');
@@ -108,13 +113,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 document.body.appendChild(link);
                 link.click();
 
-                // Small delay to ensure the browser registers the click before removal/redirect
                 setTimeout(() => {
                     document.body.removeChild(link);
                     window.location.href = '/thank-you';
                 }, 1500);
             } else {
-                // For other resources, just redirect (or add more logic later)
                 window.location.href = '/thank-you';
             }
         });
