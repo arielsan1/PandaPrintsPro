@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Prep Deck - Flashcards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .filter-group {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            background: rgba(255,255,255,0.15);
+            padding: 10px 15px;
+            border-radius: 25px;
+        }
+        
+        .filter-label {
+            color: white;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        
+        select {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            background: white;
+            color: #333;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        button {
+            padding: 12px 20px;
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+        
+        button:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+        
+        .print-btn {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .progress {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            min-height: 300px;
+            cursor: pointer;
+            perspective: 1000px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        
+        .card-front {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            justify-content: space-between;
+        }
+        
+        .card-back {
+            background: white;
+            color: #333;
+            transform: rotateY(180deg);
+            border: 2px solid #667eea;
+        }
+        
+        .card-category {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            width: fit-content;
+        }
+        
+        .card-back .card-category {
+            background: #667eea;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .card-front h3 {
+            font-size: 1.3em;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+        
+        .card-back h3 {
+            color: #667eea;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        
+        .card-content {
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        .card-back .card-content {
+            color: #555;
+        }
+        
+        .card-hint {
+            font-size: 0.85em;
+            opacity: 0.8;
+            margin-top: auto;
+            font-style: italic;
+        }
+        
+        .flip-instruction {
+            display: none;
+            text-align: center;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 0.8em;
+        }
+        
+        .card-front .flip-instruction {
+            display: block;
+        }
+        
+        .print-view {
+            display: none;
+        }
+        
+        .print-view.active {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card {
+                min-height: 250px;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            header, .controls, .progress, .cards-grid {
+                display: none;
+            }
+            
+            .print-view.active {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+                padding: 20px;
+            }
+            
+            .print-card {
+                width: 100%;
+                height: 250px;
+                break-inside: avoid;
+                page-break-inside: avoid;
+                border: 2px solid #667eea;
+                border-radius: 8px;
+                padding: 20px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Interview Prep Deck</h1>
+            <p class="subtitle">50 Strategic Flashcards | Master the STAR Method</p>
+        </header>
+        
+        <div class="controls">
+            <div class="filter-group">
+                <label class="filter-label">Filter by Category:</label>
+                <select id="categoryFilter">
+                    <option value="">All Categories</option>
+                    <option value="Basics">The Basics</option>
+                    <option value="Behavioral">Behavioral (STAR)</option>
+                    <option value="Questions">Questions to Ask</option>
+                    <option value="Situational">Situational & Technical</option>
+                    <option value="Culture">Company Culture & Values</option>
+                </select>
+            </div>
+            
+            <div class="button-group">
+                <button onclick="shuffleCards()">🔀 Shuffle</button>
+                <button onclick="togglePrintView()" class="print-btn">🖨️ Print Deck</button>
+            </div>
+        </div>
+        
+        <div class="progress">
+            <span id="cardCount">50</span> cards
+        </div>
+        
+        <div class="cards-grid" id="cardsGrid"></div>
+        
+        <div class="print-view" id="printView"></div>
+    </div>
+    
+    <script>
+        const cards = [
+            // CATEGORY 1: THE BASICS
+            { category: "Basics", front: "Tell me about yourself.", back: "Strategy: Past, Present, Future. Keep it under 2 minutes. Don't recite your resume word-for-word. Highlight: Your background → Your current role/goals → Why this position excites you." },
+            { category: "Basics", front: "Why do you want this job?", back: "Connect your skills & values to the role. Show you've researched the company. Example: 'I'm drawn to your focus on X because I'm passionate about Y, and my experience in Z positions me to contribute.'" },
+            { category: "Basics", front: "What are your greatest strengths?", back: "Choose 2-3 strengths that match the job description. Use proof: 'I'm detail-oriented—in my last role, I reduced errors by 20% through process improvements.'" },
+            { category: "Basics", front: "What is your biggest weakness?", back: "Choose a real weakness, not a fake one ('I work too hard'). Show growth: 'I struggled with delegation, so I took a course and now I trust my team to own projects.'" },
+            { category: "Basics", front: "Where do you see yourself in 5 years?", back: "Be specific and ambitious without leaving the company. Example: 'I see myself as a senior contributor in [role] with deep expertise in [area], leading [type of project].'" },
+            
+            // CATEGORY 2: BEHAVIORAL (STAR METHOD)
+            { category: "Behavioral", front: "Tell me about a time you failed.", back: "STAR: Situation: Set the scene briefly. Task: What was your goal? Action: What did YOU do to fix it? Result: What did you learn? Show ownership & growth." },
+            { category: "Behavioral", front: "Describe a time you solved a difficult problem.", back: "STAR: Situation: Context & challenge. Task: Your responsibility. Action: Your specific steps (data? research? collaboration?). Result: Measurable outcome. Keep it 1-2 minutes." },
+            { category: "Behavioral", front: "Tell me about a time you showed leadership.", back: "STAR: You don't need a title. Leadership = influence. Task: What did the team need? Action: How did you step up? Result: Did the team succeed? What did they learn from you?" },
+            { category: "Behavioral", front: "Give an example of when you missed a deadline.", back: "STAR: Situation: Why did it happen? Task: Your role. Action: How did you communicate & recover? Result: What safeguards did you put in place? Show accountability & solutions." },
+            { category: "Behavioral", front: "Tell me about a time you worked on a team.", back: "STAR: Situation: Project & team size. Task: Your role & the goal. Action: How did you collaborate? What did you contribute? Result: Did you succeed? What made it effective?" },
+            { category: "Behavioral", front: "Describe a conflict with a coworker.", back: "STAR: Situation: What was the disagreement? Task: Why did it matter? Action: How did you approach them? Did you listen? Compromise? Result: How did you resolve it professionally?" },
+            { category: "Behavioral", front: "Tell me about a time you went above and beyond.", back: "STAR: Situation: What was the standard? Task: What did the project need? Action: What extra effort did you put in? Result: Impact on team, project, or customer? What recognition did you get?" },
+            { category: "Behavioral", front: "Give an example of when you took initiative.", back: "STAR: Situation: What gap did you notice? Task: Did anyone ask you? Action: What did you do without being asked? Result: Did it improve things? Did leadership notice? Was it implemented?" },
+            { category: "Behavioral", front: "Describe a time you received critical feedback.", back: "STAR: Situation: What was the feedback? Task: How did you feel initially? Action: Did you ask clarifying questions? Implement changes? Practice? Result: How did you improve? What's different now?" },
+            { category: "Behavioral", front: "Tell me about a time you had a tight deadline.", back: "STAR: Situation: Project & deadline. Task: Complexity & scope. Action: How did you prioritize? Did you ask for help? Work overtime? Delegate? Result: Did you meet it? What did you learn about time management?" },
+            { category: "Behavioral", front: "Give an example of when you influenced a decision.", back: "STAR: Situation: What decision was being made? Task: Why did you care about the outcome? Action: How did you present your idea? Did you use data? Get buy-in? Result: Was your recommendation taken? What was the impact?" },
+            
+            // CATEGORY 3: SITUATIONAL & TECHNICAL
+            { category: "Situational", front: "How would you handle a difficult customer?", back: "Strategy: Listen actively. Empathize with their frustration. Ask clarifying questions. Offer solutions (not excuses). Follow up. Example: 'I'd acknowledge their concern, find the root cause, and provide a fix or escalate if needed.'" },
+            { category: "Situational", front: "What would you do if you disagreed with your boss?", back: "Strategy: Approach privately & respectfully. Use data/evidence. Ask questions to understand their perspective. Propose alternatives. Respect their decision. Show you're team-first." },
+            { category: "Situational", front: "How do you handle multiple priorities?", back: "Strategy: Assess impact & urgency. Break tasks into steps. Communicate timelines. Ask for help if needed. Use tools (calendar, task mgmt). Example: 'I'd prioritize by deadline & impact, then update stakeholders.'" },
+            { category: "Situational", front: "Tell me about a time you had to learn something new quickly.", back: "STAR: Situation: What did you need to learn? Task: How long did you have? Action: Resources used? Did you ask for help? Practice? Result: How quickly did you become proficient? Impact on project?" },
+            { category: "Situational", front: "How do you handle failure or rejection?", back: "Strategy: Show resilience. Example: 'I see failure as data. I analyze what went wrong, adjust, and try again.' Give a real example of bouncing back." },
+            { category: "Situational", front: "What would you do if you made a mistake at work?", back: "Strategy: Own it immediately. Don't hide it. Communicate to relevant people. Fix it or propose a fix. Learn from it. Example: 'I'd tell my manager right away & work on a solution.'" },
+            { category: "Situational", front: "How do you stay organized and on track?", back: "Strategy: Mention specific tools (Asana, Trello, Notion, calendar). Explain your system (daily priorities, weekly reviews, etc.). Show you're intentional. Tailor to the role." },
+            
+            // CATEGORY 4: QUESTIONS TO ASK THEM
+            { category: "Questions", front: "Do you have questions for us?", back: "YES! Always ask. Examples: 'How does this team measure success in the first 90 days?' 'What is the biggest challenge the team faces right now?' 'How would my success be evaluated?' 'What does growth look like here?'" },
+            { category: "Questions", front: "What should I ask about the role?", back: "Avoid: 'What's the salary?' or 'How much vacation?' Ask instead: 'What does a typical day look like?' 'What are the key metrics for this role?' 'What does success look like after 6 months?'" },
+            { category: "Questions", front: "What should I ask about the team?", back: "Good questions: 'What's the team dynamic like?' 'How do you handle conflicts?' 'What do you like most about working here?' 'How does the team collaborate?' Shows you care about culture fit." },
+            { category: "Questions", front: "What should I ask about the company?", back: "Good questions: 'What are the company's main challenges right now?' 'How does this role contribute to the company goals?' 'What's the company culture like?' 'What excites you most about the direction?' Shows genuine interest." },
+            { category: "Questions", front: "What should I ask the hiring manager?", back: "Good questions: 'Why did this position open?' 'What did the last person in this role go on to do?' 'What would you want me to accomplish in the first month?' 'What's your management style?' Shows you're thinking strategically." },
+            
+            // CATEGORY 5: COMPANY CULTURE & VALUES
+            { category: "Culture", front: "Tell me about a time you embodied teamwork.", back: "STAR: Situation: What was the project? Task: What role did you play? Action: How did you support your teammates? Result: Did the team succeed? What did you learn about collaboration?" },
+            { category: "Culture", front: "Describe a time you showed integrity.", back: "STAR: Situation: What was the ethical choice? Task: Was there pressure to do otherwise? Action: What did you do? Did you speak up? Result: What was the outcome? Did it align with your values?" },
+            { category: "Culture", front: "Give an example of when you showed adaptability.", back: "STAR: Situation: What changed? Task: How did it impact your work? Action: How did you adjust? Did you learn? Help others adapt? Result: Did the team/project succeed despite the change?" },
+            { category: "Culture", front: "Tell me about a time you improved a process.", back: "STAR: Situation: What process was inefficient? Task: How did it impact productivity? Action: Did you propose a change? Get buy-in? Implement? Result: What was the impact? How much time/money saved?" },
+            { category: "Culture", front: "Describe a time you mentored or helped someone.", back: "STAR: Situation: Who did you help? Task: What did they need? Action: How did you approach it? Did you share resources? Give feedback? Check in? Result: Did they grow? What did you learn from mentoring?" },
+            { category: "Culture", front: "Tell me about a time you took ownership.", back: "STAR: Situation: What project or problem? Task: Was it officially your responsibility? Action: What did you do? Did you go beyond your role? Result: Was it successful? Did you get recognition or promotion?" },
+            { category: "Culture", front: "Give an example of when you challenged the status quo.", back: "STAR: Situation: What was the 'way things were done'? Task: Why did it need to change? Action: How did you propose a better way? Did you get feedback? Iterate? Result: Was change adopted? What was the impact?" },
+            { category: "Culture", front: "Describe a time you showed customer focus.", back: "STAR: Situation: What was the customer need? Task: What did you observe? Action: How did you prioritize their success? Result: Did they get a better experience? Did they return or refer others?" },
+            { category: "Culture", front: "Tell me about your proudest professional moment.", back: "This is your moment to shine! Tell a story of impact. Include: What you accomplished, why it mattered, what skills you used, what recognition you received. Make it relevant to the role." },
+            { category: "Culture", front: "What motivates you in your work?", back: "Be specific & authentic. Example: 'I'm motivated by solving complex problems and seeing the impact on users' or 'I love when my work directly helps people.' Connect it to the role if possible." },
+        ];
+        
+        let filteredCards = [...cards];
+        let currentCards = [...cards];
+        
+        function renderCards() {
+            const grid = document.getElementById('cardsGrid');
+            grid.innerHTML = '';
+            
+            currentCards.forEach((card, index) => {
+                const cardEl = document.createElement('div');
+                cardEl.className = 'card';
+                cardEl.innerHTML = `
+                    <div class="card-inner" onclick="this.parentElement.classList.toggle('flipped')">
+                        <div class="card-front card-face">
+                            <div>
+                                <div class="card-category">${card.category}</div>
+                                <h3>${card.front}</h3>
+                            </div>
+                            <div class="flip-instruction">Click to reveal answer</div>
+                        </div>
+                        <div class="card-back card-face">
+                            <div class="card-category">${card.category}</div>
+                            <h3>Strategy & Answer</h3>
+                            <div class="card-content">${card.back}</div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(cardEl);
+            });
+            
+            document.getElementById('cardCount').textContent = currentCards.length;
+        }
+        
+        function filterCards(category) {
+            if (!category) {
+                currentCards = [...filteredCards];
+            } else {
+                currentCards = filteredCards.filter(c => c.category === category);
+            }
+            renderCards();
+        }
+        
+        function shuffleCards() {
+            currentCards = currentCards.sort(() => Math.random() - 0.5);
+            renderCards();
+        }
+        
+        function togglePrintView() {
+            const printView = document.getElementById('printView');
+            printView.classList.toggle('active');
+            
+            if (printView.classList.contains('active')) {
+                renderPrintView();
+                window.print();
+            }
+        }
+        
+        function renderPrintView() {
+            const printView = document.getElementById('printView');
+            printView.innerHTML = '';
+            
+            currentCards.forEach(card => {
+                const frontCard = document.createElement('div');
+                frontCard.className = 'print-card';
+                frontCard.innerHTML = `<strong>${card.front}</strong>`;
+                
+                const backCard = document.createElement('div');
+                backCard.className = 'print-card';
+                backCard.innerHTML = `<small>${card.category}</small><br><strong>${card.back}</strong>`;
+                
+                printView.appendChild(frontCard);
+                printView.appendChild(backCard);
+            });
+        }
+        
+        document.getElementById('categoryFilter').addEventListener('change', (e) => {
+            filterCards(e.target.value);
+        });
+        
+        // Initial render
+        renderCards();
+    </script>
+</body>
+</html>

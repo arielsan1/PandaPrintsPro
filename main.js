@@ -130,6 +130,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.body.removeChild(link);
                     window.location.href = '/thank-you';
                 }, 1500);
+            } else if (currentResource === 'Interview Deck') {
+                console.log('Initiating Interview Prep Deck Download...');
+                const link = document.createElement('a');
+                link.href = '/Interview_Prep_Deck.html';
+                link.download = 'Interview_Prep_Deck.html';
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+
+                setTimeout(() => {
+                    document.body.removeChild(link);
+                    window.location.href = '/thank-you';
+                }, 1500);
             } else {
                 window.location.href = '/thank-you';
             }
