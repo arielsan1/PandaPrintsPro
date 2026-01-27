@@ -56,7 +56,7 @@ ul {
 }
 
 .section-padding {
-    padding: 100px 0;
+    padding: clamp(60px, 10vw, 120px) 0;
 }
 
 .grid {
@@ -475,9 +475,9 @@ h4 {
 
 /* Hero */
 .hero {
-    padding: 180px 0 120px;
-    background: radial-gradient(circle at top right, rgba(109, 40, 217, 0.08), transparent 50%),
-        radial-gradient(circle at bottom left, rgba(244, 63, 94, 0.08), transparent 50%);
+    padding: clamp(140px, 15vw, 200px) 0 clamp(80px, 10vw, 120px);
+    background: radial-gradient(circle at top right, rgba(229, 75, 75, 0.08), transparent 50%),
+        radial-gradient(circle at bottom left, rgba(255, 169, 135, 0.08), transparent 50%);
 }
 
 .hero-container {
@@ -488,16 +488,17 @@ h4 {
 }
 
 .hero-title {
-    font-size: 3.75rem;
+    font-size: clamp(2.5rem, 6vw, 4.25rem);
     margin-bottom: 1.5rem;
-    letter-spacing: -0.01em;
+    line-height: 1.1;
+    font-weight: 800;
 }
 
 .hero-subtitle {
-    font-size: 1.35rem;
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
     color: var(--text-muted);
     margin-bottom: 3rem;
-    max-width: 540px;
+    max-width: 600px;
 }
 
 .hero-actions {
@@ -992,4 +993,54 @@ h4 {
         flex-direction: column;
         gap: 2rem;
     }
+}
+
+/* Community Section Refinement */
+.community .split-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    background: var(--bg);
+}
+
+.hero-left {
+    padding: 100px 10% 100px 5%;
+}
+
+.hero-right {
+    min-height: 600px;
+}
+
+@media (max-width: 1024px) {
+    .community .split-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-right {
+        min-height: 400px;
+        order: -1;
+    }
+
+    .hero-left {
+        padding: 60px 2rem;
+        text-align: center;
+    }
+
+    .hero-left .hero-actions {
+        justify-content: center;
+    }
+}
+
+.text-accent {
+    color: var(--primary);
+}
+
+.section-subtitle {
+    display: block;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.85rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
 }
