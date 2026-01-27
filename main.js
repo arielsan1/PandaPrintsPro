@@ -100,18 +100,23 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
             // Test Mode: Trigger direct download if it's the ATS Guide
             if (currentResource === 'ATS Guide') {
+                console.log('Initiating ATS Guide Download...');
                 const link = document.createElement('a');
-                link.href = '/The 2026 Guide to Beating the ATS.docx.pdf';
-                link.download = 'The_2026_Guide_to_Beating_the_ATS.pdf';
+                link.href = '/ATS_Guide_2026.pdf';
+                link.download = 'ATS_Guide_2026.pdf';
+                link.style.display = 'none';
                 document.body.appendChild(link);
                 link.click();
-                document.body.removeChild(link);
-            }
 
-            // Redirect to thank you page after a slight delay to allow download to start
-            setTimeout(() => {
+                // Small delay to ensure the browser registers the click before removal/redirect
+                setTimeout(() => {
+                    document.body.removeChild(link);
+                    window.location.href = '/thank-you';
+                }, 1500);
+            } else {
+                // For other resources, just redirect (or add more logic later)
                 window.location.href = '/thank-you';
-            }, 1000);
+            }
         });
     }
 });
