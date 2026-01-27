@@ -155,9 +155,9 @@ document.addEventListener('DOMContentLoaded', () => {
         stripeButton.addEventListener('click', () => {
             console.log('Initiating Stripe Checkout for Resume Audit...');
 
-            // NOTE: You must replace these with your actual keys from the Stripe Dashboard
-            const stripe = Stripe('pk_test_YOUR_PUBLISHABLE_KEY');
-            const priceId = 'price_YOUR_PRICE_ID';
+            // NOTE: You must replace 'pk_test_...' with your actual Publishable Key from Stripe
+            const stripe = Stripe('pk_test_YOUR_ACTUAL_PUBLISHABLE_KEY');
+            const priceId = 'price_1Su9gdENnK9pfvcMZd7URRw2';
 
             stripe.redirectToCheckout({
                 lineItems: [{ price: priceId, quantity: 1 }],
