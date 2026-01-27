@@ -117,6 +117,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.body.removeChild(link);
                     window.location.href = '/thank-you';
                 }, 1500);
+            } else if (currentResource === 'Clarity Workbook') {
+                console.log('Initiating Career Clarity Workbook Download...');
+                const link = document.createElement('a');
+                link.href = '/Career_Clarity_Workbook.html';
+                link.download = 'Career_Clarity_Workbook.html';
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+
+                setTimeout(() => {
+                    document.body.removeChild(link);
+                    window.location.href = '/thank-you';
+                }, 1500);
             } else {
                 window.location.href = '/thank-you';
             }
