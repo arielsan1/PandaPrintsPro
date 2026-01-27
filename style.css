@@ -172,6 +172,18 @@ h4 {
     color: var(--primary);
 }
 
+.header-social {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    transition: var(--transition);
+}
+
+.header-social:hover {
+    color: #E60023;
+    /* Pinterest Red */
+    transform: translateY(-2px);
+}
+
 /* Hero */
 .hero {
     padding: 180px 0 120px;
@@ -493,6 +505,15 @@ h4 {
 
 .link-group ul a:hover {
     color: var(--primary);
+}
+
+.link-group .fab {
+    margin-right: 8px;
+    font-size: 1.1rem;
+}
+
+.link-group a:hover .fa-pinterest {
+    color: #E60023;
 }
 
 .footer-bottom {
