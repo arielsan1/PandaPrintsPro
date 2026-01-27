@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Community & Testimonials | PandaPrintsPro</title>
+    <title>Community | PandaPrintsPro x LaunchBox</title>
     <meta name="description"
-        content="See how PandaPrintsPro is helping professionals land their dream jobs. Share your success story with our community.">
+        content="Join the PandaPrints community on LaunchBox. Connect with professionals, share wins, and get resume feedback.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,6 +14,70 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
+    <style>
+        .split-hero {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            min-height: 85vh;
+            align-items: center;
+        }
+
+        .hero-left {
+            padding: 120px 8% 80px;
+            background: var(--bg);
+        }
+
+        .hero-right {
+            height: 100%;
+            background: #fdf2f0;
+            /* Warm tint matching the new palette */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 40px;
+        }
+
+        .hero-right img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transform: perspective(1000px) rotateY(-5deg);
+        }
+
+        .iframe-section {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .iframe-wrapper {
+            background: var(--white);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 1024px) {
+            .split-hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-right {
+                order: -1;
+                min-height: 350px;
+                padding: 4rem 2rem;
+            }
+
+            .hero-left {
+                padding: 60px 2rem 100px;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -41,143 +105,43 @@
     </header>
 
     <main>
-        <section class="hero-subpage community-hero">
-            <div class="container">
-                <h1 class="hero-title">The PandaPrints Community</h1>
-                <p class="hero-subtitle">Real stories from professionals who leveled up their careers using our tools,
-                    templates, and strategy calls.</p>
+        <section class="split-hero">
+            <div class="hero-left reveal">
+                <h1 class="hero-title">Join the PandaPrints Community <span class="text-accent">(Powered by
+                        LaunchBox)</span></h1>
+                <p class="lead">We've partnered with LaunchBox.space—a vibrant community for entrepreneurs and
+                    professionals—to create a dedicated space where you can connect with other job seekers, share wins,
+                    ask career questions, and get feedback on your resumes.</p>
+                <div class="hero-actions">
+                    <a href="https://www.launchbox.space/[your-group-link]" target="_blank"
+                        class="btn btn-primary btn-large">Join the Community on LaunchBox</a>
+                </div>
+            </div>
+            <div class="hero-right reveal">
+                <!-- Using a high-quality representational community platform image -->
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1000"
+                    alt="LaunchBox Community Preview">
             </div>
         </section>
 
-        <section class="testimonials-wall section-padding">
+        <section class="iframe-section section-padding">
             <div class="container">
                 <div class="section-header text-center">
-                    <span class="section-subtitle">Wall of Love</span>
-                    <h2 class="section-title">Success Stories</h2>
+                    <span class="section-subtitle">Stay Connected</span>
+                    <h2 class="section-title">Live Community Feed <span
+                            style="font-size: 0.6em; display: block; margin-top: 0.5rem; opacity: 0.7;">(Hosted on
+                            LaunchBox)</span></h2>
                 </div>
 
-                <div class="grid grid-3">
-                    <!-- Testimonial 1 -->
-                    <div class="card testimonial-card reveal">
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="review-text">"The Resume Audit was a game changer. I went from 0 callbacks to 3
-                            interviews in one week after implementing the video feedback."</p>
-                        <div class="review-author">
-                            <strong>Sarah M.</strong>
-                            <span>Marketing Director</span>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 2 -->
-                    <div class="card testimonial-card reveal">
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="review-text">"I use the Career Clarity Workbook every time I feel stuck. It's so much
-                            more than just a list of tips—it actually makes you think."</p>
-                        <div class="review-author">
-                            <strong>James R.</strong>
-                            <span>Software Engineer</span>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 3 -->
-                    <div class="card testimonial-card reveal">
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="review-text">"The Interview Prep Deck is the only reason I landed my senior role. It
-                            gave me the confidence to handle the 'tough' questions with ease."</p>
-                        <div class="review-author">
-                            <strong>Elena G.</strong>
-                            <span>Product Manager</span>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 4 -->
-                    <div class="card testimonial-card reveal">
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="review-text">"Finally, a resume template that actually looks professional and isn't a
-                            nightmare to edit. Well worth the small investment!"</p>
-                        <div class="review-author">
-                            <strong>David K.</strong>
-                            <span>Financial Analyst</span>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 5 -->
-                    <div class="card testimonial-card reveal">
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="review-text">"The strategy call was worth every penny. It felt like having a career
-                            coach and a cheerleader all in one. Highly recommend."</p>
-                        <div class="review-author">
-                            <strong>Michelle T.</strong>
-                            <span>HR Specialist</span>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 6 -->
-                    <div class="card testimonial-card reveal">
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="review-text">"I've shared the Free Tools link with my entire graduating class. It's
-                            the most high-value career site I've found."</p>
-                        <div class="review-author">
-                            <strong>Lucas W.</strong>
-                            <span>Recent Graduate</span>
-                        </div>
-                    </div>
+                <div class="iframe-wrapper reveal">
+                    <iframe src="https://www.launchbox.space/embed/[your-channel]" width="100%" height="800px"
+                        frameborder="0" style="border:0;" allowfullscreen></iframe>
                 </div>
-            </div>
-        </section>
 
-        <section class="share-experience section-padding bg-soft">
-            <div class="container text-center reveal">
-                <h2 class="section-title">Share Your Experience</h2>
-                <p class="lead" style="max-width: 600px; margin: 0 auto 3rem;">Have our tools or advice helped you land
-                    a role? We want to celebrate with you! Join our community by sharing your story.</p>
-
-                <form class="lead-form"
-                    style="max-width: 500px; margin: 0 auto; background: var(--white); padding: 3rem; border-radius: 24px; box-shadow: var(--shadow-md);">
-                    <input type="text" placeholder="Full Name" required>
-                    <input type="text" placeholder="Job Title / Industry" required>
-                    <textarea placeholder="Tell us your story..." required
-                        style="width: 100%; min-height: 150px; padding: 1rem 1.5rem; border-radius: 12px; border: 1px solid rgba(229, 75, 75, 0.2); background: var(--bg-soft); color: var(--text); font-family: inherit; margin-bottom: 1rem;"></textarea>
-                    <button type="submit" class="btn btn-primary btn-full">Submit My Story</button>
-                    <p class="form-disclaimer">By submitting, you agree to let us feature your story on our Wall of
-                        Love.</p>
-                </form>
+                <div class="text-center" style="margin-top: 3rem;">
+                    <a href="https://www.launchbox.space/[your-group-link]" target="_blank"
+                        class="btn btn-outline btn-large">Open Full Community in LaunchBox</a>
+                </div>
             </div>
         </section>
     </main>
