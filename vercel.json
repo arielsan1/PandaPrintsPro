@@ -1,4 +1,22 @@
 {
     "cleanUrls": true,
-    "trailingSlash": false
+    "trailingSlash": false,
+    "rewrites": [
+        {
+            "source": "/free-tools",
+            "destination": "/free-tools.html"
+        },
+        {
+            "source": "/coaching",
+            "destination": "/coaching.html"
+        },
+        {
+            "source": "/blog",
+            "destination": "/blog.html"
+        },
+        {
+            "source": "/thank-you",
+            "destination": "/thank-you.html"
+        }
+    ]
 }
