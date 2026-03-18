@@ -180,25 +180,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Stripe Checkout for Resume Audit
-    const stripeButton = document.getElementById('resume-audit-checkout');
-    if (stripeButton) {
-        stripeButton.addEventListener('click', () => {
-            console.log('Initiating Stripe Checkout for Resume Audit...');
 
-            const stripe = Stripe('pk_live_51Sign4ENnK9pfvcMKRdTGicj7mpX3GnrDLVGIzlbJdX8uzuk7JiM4fFE8c970XBnqfsFiNRYF7Fy17H0Yx6y3oQd00KBWdYuBf');
-            const priceId = 'price_1Su9gdENnK9pfvcMZd7URRw2';
-
-            stripe.redirectToCheckout({
-                lineItems: [{ price: priceId, quantity: 1 }],
-                mode: 'payment',
-                successUrl: window.location.origin + '/thank-you',
-                cancelUrl: window.location.origin + '/#coaching',
-            }).then((result) => {
-                if (result.error) {
-                    alert(result.error.message);
-                }
-            });
-        });
-    }
 });
